@@ -94,7 +94,7 @@ int main(int argc, char ** argv) {
   /********************************************/
   /***************** blinky *******************/
   /********************************************/
-printf("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa \n");
+
 
   //AtomicModelPtr blinky1 = cadmium::dynamic::translate::make_dynamic_atomic_model<Blinky, TIME>("blinky1");
 
@@ -108,12 +108,8 @@ printf("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa \n");
   /********************************************/
   AtomicModelPtr digitalOutput1 = cadmium::dynamic::translate::make_dynamic_atomic_model<DigitalOutput, TIME>("digitalOutput1", LED1);
 
-printf("before \n");
- //AtomicModelPtr rfid1 = cadmium::dynamic::translate::make_dynamic_atomic_model<DigitalInput, TIME>("rfid1", BUTTON1);
+ printf("before \n");
  AtomicModelPtr rfid1 = cadmium::dynamic::translate::make_dynamic_atomic_model<Rfid, TIME>("rfid1", D11, D12, D13, D10, D8);
-  // AtomicModelPtr rfid1 = cadmium::dynamic::translate::make_dynamic_atomic_model<Rfid, TIME>("rfid1");
-
-printf("afterrrrrrrrr \n");
 
   /************************/
   /*******TOP MODEL********/
@@ -137,11 +133,10 @@ printf("afterrrrrrrrr \n");
     eocs_TOP,
     ics_TOP
   );
-printf("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa \n");
 
   ///****************////
-  cadmium::dynamic::engine::runner<NDTime, logger_top> r(TOP, {0});
-  r.run_until(NDTime("00:10:00:000"));
+  cadmium::dynamic::engine::runner<NDTime, log_all> r(TOP, {0});
+  r.run_until(NDTime("01:00:00:000"));
   #ifndef RT_ARM_MBED
     return 0;
   #endif
